@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>smtghaus — Your Brand. Elevated.</title>
+<link rel="icon" href="assets/logo-mark.png">
+<meta name="description" content="smtghaus is a strategic creative house in Kuala Lumpur — brand, campaigns, and influencer marketing under one roof.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAF8F4;
+    --cream-alt:#F1EBE3;
+    --maroon:#6E1330;
+    --maroon-dark:#43091C;
+    --maroon-light:#8F2C4C;
+    --mauve:#C79CAA;
+    --mauve-tint:#EADFE2;
+    --black:#1B1717;
+    --gray:#6B6560;
+    --gray-light:#96908B;
+    --white:#FFFFFF;
+    --radius:18px;
+    --maxw:1180px;
+    --shadow:0 10px 30px rgba(67,9,28,0.08);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--cream);
+    color:var(--black);
+    line-height:1.55;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:'Poppins',sans-serif; font-weight:700; letter-spacing:-0.01em;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  button{font-family:inherit; cursor:pointer;}
+
+  .eyebrow{
+    font-size:12.5px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--maroon); display:flex; align-items:center; gap:10px; margin-bottom:14px;
+  }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:14px 26px; border-radius:999px; font-weight:600; font-size:14.5px;
+    border:none; transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{
+    background:linear-gradient(120deg, var(--maroon) 0%, var(--maroon-light) 100%);
+    color:var(--white); box-shadow:0 8px 20px rgba(110,19,48,0.28);
+  }
+  .btn-primary:hover{box-shadow:0 10px 26px rgba(110,19,48,0.4);}
+  .btn-ghost{
+    background:transparent; color:var(--black); border:1.5px solid rgba(27,23,23,0.18);
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
+  }
+  .btn-ghost:hover{border-color:var(--maroon); color:var(--maroon); background:rgba(110,19,48,0.06); box-shadow:0 6px 16px rgba(110,19,48,0.1);}
+  .btn-light{background:var(--white); color:var(--maroon); box-shadow:0 8px 20px rgba(0,0,0,0.08);}
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(250,248,244,0.85); backdrop-filter:blur(10px);
+    border-bottom:1px solid transparent;
+    transition:border-color .25s ease, box-shadow .25s ease;
+  }
+  header.scrolled{border-color:rgba(27,23,23,0.08); box-shadow:0 4px 20px rgba(0,0,0,0.04);}
+  nav{display:flex; align-items:center; justify-content:space-between; padding:16px 28px; max-width:var(--maxw); margin:0 auto;}
+  .logo{display:flex; align-items:center; gap:9px;}
+  .logo img.mark{height:26px; width:auto;}
+  .logo img.word{height:16px; width:auto;}
+  .logo img.stacked{height:42px; width:auto;}
+  .nav-links{display:flex; gap:36px; font-size:14.5px; font-weight:600;}
+  .nav-links a{
+    position:relative; color:var(--black); opacity:0.7; transition:opacity .2s ease, color .2s ease;
+    padding-bottom:3px;
+  }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; right:100%; bottom:0; height:2px;
+    background:var(--maroon); border-radius:2px; transition:right .25s ease;
+  }
+  .nav-links a:hover{opacity:1; color:var(--maroon);}
+  .nav-links a:hover::after{right:0;}
+  .nav-cta{display:flex; gap:14px; align-items:center;}
+  .nav-cta .btn{padding:11px 22px; font-size:13.5px;}
+  .hamburger{display:none; flex-direction:column; gap:5px; background:none; border:none;}
+  .hamburger span{width:24px; height:2px; background:var(--black);}
+
+  /* HERO */
+  .hero{position:relative; padding:104px 0 90px; overflow:hidden;}
+  .hero-wm{
+    position:absolute; right:16px; top:0; width:560px; opacity:0.95; z-index:0; pointer-events:none;
+  }
+  .hero-inner{position:relative; z-index:1; max-width:640px;}
+  .hero h1{font-size:clamp(38px,5.4vw,64px); line-height:1.3; margin-bottom:22px;}
+  .hero h1 .rotator{
+    display:inline-block; color:transparent; -webkit-text-stroke:1.8px var(--maroon);
+    position:relative; min-width:1ch; transition:opacity .25s ease;
+    font-size:1.22em;
+  }
+  .hero p.lead{font-size:17.5px; color:var(--gray); max-width:460px; margin-bottom:34px;}
+  .hero-ctas{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:42px;}
+  .hero-tags{display:flex; gap:10px; flex-wrap:wrap;}
+  .tag{
+    font-size:12.5px; font-weight:600; padding:7px 14px; border-radius:999px;
+    background:var(--white); border:1px solid rgba(27,23,23,0.1); color:var(--gray);
+  }
+  .social-rail{
+    position:fixed; right:26px; top:50%; transform:translateY(-50%); z-index:60;
+    display:flex; flex-direction:column; gap:16px; align-items:center;
+  }
+  .social-rail a{
+    width:38px; height:38px; border-radius:50%; background:var(--white); box-shadow:var(--shadow);
+    display:flex; align-items:center; justify-content:center; font-size:14px; color:var(--maroon);
+    transition:transform .15s;
+  }
+  .social-rail a:hover{transform:scale(1.1);}
+  .social-rail::after{content:""; width:1px; height:60px; background:rgba(27,23,23,0.15); margin-top:4px;}
+
+  /* SECTION SPACING */
+  section{padding:88px 0;}
+  .section-head{max-width:640px; margin-bottom:48px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px); line-height:1.15;}
+  .section-head p{color:var(--gray); font-size:16px; margin-top:14px;}
+
+  /* TRUST / LOGO MARQUEE (real assets, grayscale-to-color hover) */
+  .trust{padding:60px 0;}
+  .trust .eyebrow{justify-content:center;}
+  .logos-marquee{
+    overflow:hidden; margin-top:30px;
+    -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+    mask-image:linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  }
+  .logo-track{display:flex; gap:64px; width:max-content; align-items:center; animation:logoscroll 32s linear infinite;}
+  .logos-marquee:hover .logo-track{animation-play-state:paused;}
+  .logo-track img{height:60px; width:auto; object-fit:contain; filter:grayscale(1); opacity:.65; transition:filter .25s, opacity .25s;}
+  .logo-track img:hover{filter:grayscale(0); opacity:1;}
+  @keyframes logoscroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* ABOUT STRIP (team photo) */
+  .about-strip .grid2{display:grid; grid-template-columns:0.95fr 1.05fr; gap:44px; align-items:center;}
+  .about-strip .photo{border-radius:var(--radius); overflow:hidden; aspect-ratio:16/11;}
+  .about-strip .photo img{width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.05);}
+  .about-strip h2{font-size:clamp(26px,3.2vw,36px); margin-bottom:16px;}
+  .about-strip p{color:var(--gray); font-size:15.5px; margin-bottom:14px; max-width:460px;}
+
+  /* STATS */
+  .stats-section{
+    position:relative; overflow:hidden; color:var(--white); padding:80px 0;
+    background:linear-gradient(120deg, var(--maroon-dark) 0%, var(--maroon) 55%, var(--maroon-light) 100%);
+  }
+  .stats-section::before{
+    content:""; position:absolute; top:50%; right:-120px; width:420px; height:420px; border-radius:50%;
+    background:rgba(255,255,255,0.06); transform:translateY(-50%); pointer-events:none;
+  }
+  .stats-section::after{
+    content:""; position:absolute; bottom:-160px; left:-80px; width:280px; height:280px; border-radius:50%;
+    background:rgba(255,255,255,0.05); pointer-events:none;
+  }
+  .stats-inner{
+    position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:0 28px;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:30px; text-align:center;
+  }
+  .stats-inner > div{position:relative;}
+  .stats-inner > div + div::before{
+    content:""; position:absolute; left:-15px; top:8px; bottom:8px; width:1px; background:rgba(255,255,255,0.18);
+  }
+  .stat-num{font-family:'Poppins',sans-serif; font-weight:800; font-size:clamp(48px,7vw,84px); color:var(--white); line-height:1;}
+  .stat-label{font-size:14.5px; color:rgba(255,255,255,0.75); margin-top:10px;}
+  .stats-footnote{position:relative; z-index:1; text-align:center; font-size:12px; color:rgba(255,255,255,0.6); margin-top:26px; padding:0 28px;}
+
+  /* SERVICES */
+  .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .service-card{
+    background:var(--white); border:1px solid rgba(27,23,23,0.07); border-radius:var(--radius);
+    padding:28px; transition:transform .18s, box-shadow .18s;
+  }
+  .service-card:hover{transform:translateY(-4px); box-shadow:var(--shadow);}
+  .service-card .ic{
+    width:44px; height:44px; border-radius:12px; background:var(--mauve-tint); color:var(--maroon);
+    display:flex; align-items:center; justify-content:center; font-size:19px; margin-bottom:18px; font-weight:700;
+  }
+  .service-card h4{font-size:17px; margin-bottom:10px;}
+  .service-card p{font-size:14px; color:var(--gray);}
+  .service-card.featured{
+    background:linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 100%);
+    border-color:transparent; position:relative; box-shadow:0 14px 34px rgba(110,19,48,0.25);
+  }
+  .service-card.featured .ic{background:rgba(255,255,255,0.16); color:var(--white);}
+  .service-card.featured h4{color:var(--white);}
+  .service-card.featured p{color:rgba(255,255,255,0.85);}
+  .service-card.featured::after{
+    content:"Core Expertise"; position:absolute; top:26px; right:26px; font-size:10.5px; font-weight:700;
+    letter-spacing:0.4px; text-transform:uppercase; background:rgba(255,255,255,0.16); color:var(--white);
+    padding:5px 12px; border-radius:999px;
+  }
+  @media(max-width:600px){
+    .service-card.featured::after{position:static; display:inline-block; margin-bottom:14px;}
+  }
+
+  /* APPROACH / PROBLEM-SOLUTION */
+  .approach-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+  .approach-col{border-radius:var(--radius); padding:34px;}
+  .approach-col.problem{background:var(--cream-alt); border:1px solid rgba(27,23,23,0.08);}
+  .approach-col.solution{background:linear-gradient(160deg, var(--maroon), var(--maroon-light)); color:var(--white);}
+  .approach-col h3{font-size:20px; margin-bottom:22px;}
+  .approach-item{display:flex; gap:14px; padding:14px 0; border-top:1px solid rgba(27,23,23,0.08);}
+  .approach-col.solution .approach-item{border-top:1px solid rgba(255,255,255,0.18);}
+  .approach-item:first-of-type{border-top:none;}
+  .approach-item .icon{font-size:15px; flex-shrink:0; margin-top:2px;}
+  .approach-item p{font-size:14.5px;}
+  .approach-col.problem .icon{color:var(--gray-light);}
+  .approach-col.solution .icon{color:#F4D9E2;}
+
+  /* PRICING */
+  .pricing-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .price-card{border-radius:var(--radius); overflow:hidden; border:1px solid rgba(27,23,23,0.08); background:var(--white);}
+  .price-card.featured{border:2px solid var(--maroon); position:relative; transform:translateY(-10px);}
+  .price-card.featured::before{
+    content:"MOST POPULAR"; position:absolute; top:16px; right:16px; background:var(--maroon); color:var(--white);
+    font-size:10px; font-weight:700; padding:5px 10px; border-radius:6px; letter-spacing:0.06em;
+  }
+  .price-head{padding:30px 26px; background:var(--maroon-dark); color:var(--white);}
+  .price-card.featured .price-head{background:var(--maroon);}
+  .price-head h4{font-size:22px; margin-bottom:8px;}
+  .price-head .amt{font-size:14px; opacity:0.85;}
+  .price-head .amt b{font-size:19px; display:block; margin-top:2px;}
+  .price-body{padding:26px;}
+  .price-body ul{list-style:none;}
+  .price-body li{font-size:13.5px; color:var(--gray); padding:8px 0; border-top:1px solid rgba(27,23,23,0.06); padding-left:20px; position:relative;}
+  .price-body li:first-child{border-top:none;}
+  .price-body li::before{content:"—"; position:absolute; left:0; color:var(--maroon);}
+
+  .price-single{
+    display:grid; grid-template-columns:0.9fr 1.1fr; max-width:900px; margin:0 auto;
+    border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+  }
+  .price-single .price-head{
+    background:var(--maroon); display:flex; flex-direction:column; justify-content:center; padding:44px 38px;
+  }
+  .price-single .price-head h4{font-size:26px; margin-bottom:16px;}
+  .price-single .price-head .amt{font-size:14px; opacity:0.85;}
+  .price-single .price-head .amt b{font-size:22px; display:block; margin-top:4px;}
+  .price-single .price-body{background:var(--mauve-tint); padding:44px 38px;}
+  .price-single .price-body .includes-label{font-size:13px; font-weight:700; color:var(--maroon); margin-bottom:14px; text-transform:uppercase; letter-spacing:0.04em;}
+  .price-single .price-body li{border-top-color:rgba(27,23,23,0.1);}
+  .pricing-footnote{text-align:center; font-size:13px; font-style:italic; color:var(--gray); margin-top:26px;}
+  @media(max-width:700px){
+    .price-single{grid-template-columns:1fr;}
+  }
+
+  /* RATE CARD */
+  .ratecard{margin-top:70px; padding-top:60px; border-top:1px solid rgba(27,23,23,0.08);}
+  .ratecard-head{display:flex; align-items:flex-start; justify-content:space-between; gap:30px; flex-wrap:wrap; margin-bottom:36px;}
+  .ratecard-head .rc-title{max-width:600px;}
+  .ratecard-head .rc-badge{
+    background:var(--maroon); color:var(--white); font-size:11px; font-weight:700; letter-spacing:0.05em;
+    padding:7px 14px; border-radius:999px; white-space:nowrap;
+  }
+  .ratecard-head .rc-eyebrow{font-size:12px; font-weight:700; color:var(--maroon); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:10px;}
+  .ratecard-head h3{font-size:clamp(24px,2.8vw,32px); margin-bottom:12px;}
+  .ratecard-head p{color:var(--gray); font-size:15px;}
+  .rc-builtfor{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:40px;}
+  .rc-builtfor span{
+    font-size:13px; color:var(--maroon); background:var(--mauve-tint); padding:8px 16px; border-radius:999px; font-weight:600;
+  }
+  .collab-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-bottom:40px;}
+  .collab-card{
+    background:var(--white); border:1px solid rgba(27,23,23,0.08); border-radius:var(--radius); padding:28px; position:relative;
+  }
+  .collab-card.featured{border:2px solid var(--maroon); box-shadow:0 14px 30px rgba(110,19,48,0.14);}
+  .collab-card.featured::after{
+    content:"Most Common"; position:absolute; top:-13px; right:24px; background:var(--maroon); color:var(--white);
+    font-size:10.5px; font-weight:700; letter-spacing:0.04em; padding:5px 12px; border-radius:999px;
+  }
+  .collab-card .collab-type{font-size:11px; font-weight:700; color:var(--maroon); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px;}
+  .collab-card h4{font-size:19px; margin-bottom:10px;}
+  .collab-card .collab-desc{font-size:14px; color:var(--gray); margin-bottom:20px; min-height:42px;}
+  .collab-card .collab-price-label{font-size:11px; font-weight:700; color:var(--gray); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;}
+  .collab-card .collab-price{font-family:'Poppins',sans-serif; font-weight:800; font-size:30px; color:var(--maroon);}
+  .collab-card .collab-price-unit{font-size:12.5px; color:var(--gray); margin-bottom:16px; margin-top:2px;}
+  .collab-card ul{list-style:none; border-top:1px solid rgba(27,23,23,0.08); padding-top:14px;}
+  .collab-card li{font-size:13.5px; color:var(--gray); padding:5px 0; padding-left:18px; position:relative;}
+  .collab-card li::before{content:"—"; position:absolute; left:0; color:var(--maroon);}
+  .fee-covers{
+    background:var(--mauve-tint); border-radius:var(--radius); padding:24px 28px; margin-bottom:26px;
+  }
+  .fee-covers .fc-label{font-size:12px; font-weight:700; color:var(--maroon); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:14px;}
+  .fee-covers .fc-steps{display:flex; flex-wrap:wrap; gap:10px;}
+  .fee-covers .fc-steps span{
+    background:var(--white); font-size:13px; color:var(--black); padding:7px 14px; border-radius:999px; font-weight:600;
+  }
+  .fee-covers .fc-steps b{color:var(--maroon); margin-right:6px;}
+  .tnc-block{background:var(--white); border:1px solid rgba(27,23,23,0.08); border-radius:var(--radius); padding:24px 28px;}
+  .tnc-block .tnc-label{font-size:12px; font-weight:700; color:var(--maroon); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:14px;}
+  .tnc-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px 30px;}
+  .tnc-grid li{font-size:13px; color:var(--gray); padding:6px 0; padding-left:16px; position:relative; list-style:none; line-height:1.5;}
+  .tnc-grid li::before{content:"•"; position:absolute; left:0; color:var(--maroon);}
+  @media(max-width:800px){
+    .collab-grid{grid-template-columns:1fr;}
+    .tnc-grid{grid-template-columns:1fr;}
+  }
+
+  /* CONTACT (doubles as footer) */
+  #contact{background:var(--maroon-dark); color:var(--white); padding-bottom:30px;}
+  #contact .eyebrow{color:#F4D9E2;}
+  .contact-info .contact-logo{height:44px; width:auto; margin-bottom:26px; filter:brightness(0) invert(1);}
+  .contact-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:50px;}
+  .contact-info h2{font-size:clamp(28px,3.4vw,38px); margin-bottom:18px; color:var(--white);}
+  .contact-info p{color:rgba(255,255,255,0.7); margin-bottom:26px; font-size:15.5px;}
+  .contact-info .info-line{display:flex; align-items:center; gap:14px; margin-bottom:16px; font-size:14.5px; color:rgba(255,255,255,0.85);}
+  .contact-info .info-line .info-icon{
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    width:38px; height:38px; border-radius:50%; background:rgba(244,217,226,0.12); color:#F4D9E2;
+  }
+  .contact-info .info-line a{color:rgba(255,255,255,0.85);}
+  form.contact-form{background:var(--white); border:1px solid rgba(27,23,23,0.08); border-radius:var(--radius); padding:34px; box-shadow:var(--shadow);}
+  .contact-foot-bar{
+    display:flex; justify-content:space-between; padding-top:36px; margin-top:50px; border-top:1px solid rgba(255,255,255,0.12);
+    font-size:12.5px; color:rgba(255,255,255,0.6); flex-wrap:wrap; gap:10px;
+  }
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;}
+  .field{display:flex; flex-direction:column; gap:6px;}
+  .field label{font-size:12.5px; font-weight:600; color:var(--gray);}
+  .field input, .field select, .field textarea{
+    padding:12px 14px; border-radius:10px; border:1px solid rgba(27,23,23,0.15); font-family:inherit; font-size:14px;
+    background:var(--cream);
+  }
+  .field textarea{resize:vertical; min-height:80px;}
+  .full{grid-column:1/-1;}
+  form.contact-form .btn{width:100%; justify-content:center; margin-top:6px;}
+  .form-note{font-size:12px; color:var(--gray-light); margin-top:12px; text-align:center;}
+  #formConfirm{display:none; text-align:center; font-size:14px; color:var(--maroon); font-weight:600; margin-top:14px;}
+  #formError{display:none; text-align:center; font-size:14px; color:#b3261e; font-weight:600; margin-top:14px;}
+
+  /* FOOTER */
+  footer{background:var(--maroon-dark); color:var(--white); padding:70px 0 30px; margin-top:40px;}
+  .footer-top{display:flex; justify-content:space-between; align-items:flex-start; gap:50px; flex-wrap:wrap; padding-bottom:44px; border-bottom:1px solid rgba(255,255,255,0.12);}
+  .footer-eyebrow{font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#F4D9E2; margin-bottom:14px;}
+  .footer-top .big{font-family:'Poppins',sans-serif; font-weight:800; font-size:clamp(30px,4vw,44px); max-width:520px; margin-bottom:16px;}
+  .footer-top .foot-lead{font-size:15px; color:rgba(255,255,255,0.7); max-width:420px;}
+  .footer-links{display:flex; gap:60px; flex-wrap:wrap;}
+  .footer-col h5{font-size:12px; letter-spacing:0.1em; text-transform:uppercase; opacity:0.6; margin-bottom:14px;}
+  .footer-col a, .footer-col span{display:block; font-size:14px; opacity:0.85; margin-bottom:10px;}
+  .footer-info-rows{display:flex; flex-direction:column; gap:14px;}
+  .footer-info-rows .info-line{display:flex; gap:12px; font-size:14.5px;}
+  .footer-info-rows .info-line b{color:#F4D9E2; min-width:88px; font-weight:700;}
+  .footer-info-rows .info-line a, .footer-info-rows .info-line span{color:rgba(255,255,255,0.85);}
+  .footer-bottom{display:flex; justify-content:space-between; padding-top:26px; font-size:12.5px; opacity:0.6; flex-wrap:wrap; gap:10px;}
+  footer .foot-logo{height:20px; margin-bottom:14px; filter:brightness(0) invert(1);}
+
+  /* REVEAL ANIM */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .nav-links, .nav-cta .btn-ghost{display:none;}
+    .hamburger{display:flex;}
+    .services-grid{grid-template-columns:1fr 1fr;}
+    .pricing-grid{grid-template-columns:1fr;}
+    .price-card.featured{transform:none;}
+    .approach-grid{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .stats-inner{grid-template-columns:1fr; gap:36px;}
+    .stats-inner > div + div::before{display:none;}
+    .social-rail{display:none;}
+    .hero-wm{opacity:0.35; width:320px;}
+    .about-strip .grid2{grid-template-columns:1fr;}
+  }
+  @media(max-width:600px){
+    .form-row{grid-template-columns:1fr;}
+    .services-grid{grid-template-columns:1fr;}
+    .footer-links{gap:30px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="social-rail">
+  <a href="https://www.instagram.com/smtghaus/" target="_blank" title="Instagram">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8">
+      <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+      <circle cx="12" cy="12" r="4.2"></circle>
+      <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"></circle>
+    </svg>
+  </a>
+  <a href="mailto:smtghauscreative@gmail.com" title="Email">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8">
+      <rect x="3" y="5" width="18" height="14" rx="2.5"></rect>
+      <path d="M3.5 6.5 12 13 20.5 6.5"></path>
+    </svg>
+  </a>
+  <a href="https://wa.me/601161648851" target="_blank" title="WhatsApp">
+    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor">
+      <path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5C10 9 9.5 7.8 9.3 7.3c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.4-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 2 3 4.7 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"></path>
+      <path d="M12 2.5A9.5 9.5 0 0 0 3.6 17l-1.1 4 4.1-1.1A9.5 9.5 0 1 0 12 2.5z" fill="none" stroke="currentColor" stroke-width="1.4"></path>
+    </svg>
+  </a>
+</div>
+
+<header id="siteHeader">
+  <nav>
+    <a href="#top" class="logo"><img class="stacked" src="assets/logo-stacked.png" alt="smtghaus"></a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#pricing">Packages</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-primary">Get Rate Card</a>
+    </div>
+    <button class="hamburger" aria-label="menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <img class="hero-wm" src="assets/logo-mark.png" alt="">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="eyebrow">Strategic Creative House · Kuala Lumpur</div>
+      <h1>Make your brand<br><span class="rotator" id="rotator">Shape.</span></h1>
+      <p class="lead">smtghaus combines strategic design with influence-driven marketing — helping brands communicate with clarity, position confidently, and grow sustainably in competitive markets.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">Book a Strategy Call</a>
+        <a href="#services" class="btn btn-ghost">See What We Offer</a>
+      </div>
+      <div class="hero-tags">
+        <span class="tag">Brand Visual Direction</span>
+        <span class="tag">Influencer Marketing</span>
+        <span class="tag">Campaign Management</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-section reveal">
+  <div class="stats-inner">
+    <div>
+      <div class="stat-num" data-target="50">0</div>
+      <div class="stat-label">Brands elevated</div>
+    </div>
+    <div>
+      <div class="stat-num" data-target="2000">0</div>
+      <div class="stat-label">Influencers &amp; creators activated</div>
+    </div>
+    <div>
+      <div class="stat-num" data-target="900">0</div>
+      <div class="stat-label">Combined campaign reach (K)</div>
+    </div>
+  </div>
+  <p class="stats-footnote">Placeholder aggregates drawn from campaigns shown above — replace with your own verified, sign-off totals before launch.</p>
+</section>
+
+<section class="about-strip">
+  <div class="wrap">
+    <div class="grid2">
+      <div class="photo reveal"><img src="assets/team.jpg" alt="smtghaus creative team at work"></div>
+      <div class="reveal">
+        <div class="eyebrow">Who We Are</div>
+        <h2>We are creatives, strategists, and campaign thinkers — working as one integrated team.</h2>
+        <p>We don't operate like a traditional agency. Strategy, design, and influence work together seamlessly: intentional work, structured process, measurable results.</p>
+        <a href="#contact" class="btn btn-ghost">Get to know us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">What We Offer</div>
+      <h2>We create with purpose.</h2>
+      <p>Every design and campaign serves a strategic goal — not just an aesthetic one.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal"><div class="ic">01</div><h4>Creative Direction &amp; Content Strategy</h4><p>Brand alignment, concept development, visual systems, and structured content planning based on audience behaviour.</p></div>
+      <div class="service-card featured reveal"><div class="ic">02</div><h4>Influencer Marketing</h4><p>End-to-end campaign planning, creator sourcing, execution, and performance reporting.</p></div>
+      <div class="service-card reveal"><div class="ic">03</div><h4>Campaign Management</h4><p>End-to-end coordination from concept to performance analysis, across every touchpoint.</p></div>
+      <div class="service-card reveal"><div class="ic">04</div><h4>Brand Visual Direction</h4><p>High-impact visuals that position your brand at the forefront of your industry.</p></div>
+      <div class="service-card reveal"><div class="ic">05</div><h4>Social Media Design</h4><p>Strategically crafted content visuals that enhance engagement and maintain visual coherence.</p></div>
+      <div class="service-card reveal"><div class="ic">06</div><h4>Campaign Key Visuals</h4><p>High-impact hero visuals developed to anchor marketing campaigns and communicate with clarity.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="approach">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Why It Works</div>
+      <h2>We don't operate like a traditional agency.</h2>
+    </div>
+    <div class="approach-grid">
+      <div class="approach-col problem reveal">
+        <h3>Where most brand visuals fall flat</h3>
+        <div class="approach-item"><span class="icon">—</span><p>Generic templates applied without a real content strategy.</p></div>
+        <div class="approach-item"><span class="icon">—</span><p>Inconsistent posting with no long-term visual system.</p></div>
+        <div class="approach-item"><span class="icon">—</span><p>Vanity metrics reported instead of real ROI tracking.</p></div>
+      </div>
+      <div class="approach-col solution reveal">
+        <h3>How smtghaus fixes it</h3>
+        <div class="approach-item"><span class="icon">✓</span><p>Structured content planning based on real audience behaviour.</p></div>
+        <div class="approach-item"><span class="icon">✓</span><p>Long-term visual coherence across every brand touchpoint.</p></div>
+        <div class="approach-item"><span class="icon">✓</span><p>Clear reporting and insights — not just deliverables.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center;">Trusted by great brands</div>
+    <div class="logos-marquee">
+      <div class="logo-track" id="logoTrack"></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Our Prices</div>
+      <h2>Influencer Marketing.</h2>
+      <p>For shoutouts, product reviews, talent appearances, events, store visits, launches and brand awareness campaigns.</p>
+    </div>
+
+    <div class="ratecard reveal" style="margin-top:0; padding-top:0; border-top:none;">
+      <div class="rc-builtfor">
+        <span>Brand awareness</span>
+        <span>Product launch</span>
+        <span>Foot traffic</span>
+        <span>Content creation</span>
+        <span>Credibility push</span>
+      </div>
+
+      <div class="collab-grid">
+        <div class="collab-card">
+          <div class="collab-type">Collab Type 01</div>
+          <h4>Fully Sponsored</h4>
+          <p class="collab-desc">Product gifting campaign with no cash fee to creator. Best for sampling and light awareness.</p>
+          <div class="collab-price-label">Starting from</div>
+          <div class="collab-price">RM300</div>
+          <div class="collab-price-unit">per influencer · management fee</div>
+          <ul>
+            <li>KOC or KOL sourcing</li>
+            <li>Briefing and coordination</li>
+            <li>Content approval support</li>
+          </ul>
+        </div>
+        <div class="collab-card featured">
+          <div class="collab-type">Collab Type 02</div>
+          <h4>KOC Paid Collab</h4>
+          <p class="collab-desc">Key Opinion Consumers with niche trust and stronger authentic review conversion.</p>
+          <div class="collab-price-label">Starting from</div>
+          <div class="collab-price">RM500</div>
+          <div class="collab-price-unit">per influencer · management fee</div>
+          <ul>
+            <li>KOC profile matching</li>
+            <li>Briefing and coordination</li>
+            <li>Draft review and approval</li>
+          </ul>
+        </div>
+        <div class="collab-card">
+          <div class="collab-type">Collab Type 03</div>
+          <h4>KOL Paid Collab</h4>
+          <p class="collab-desc">Key Opinion Leaders for broader reach, stronger authority and higher visibility.</p>
+          <div class="collab-price-label">Starting from</div>
+          <div class="collab-price">RM700</div>
+          <div class="collab-price-unit">per influencer · management fee</div>
+          <ul>
+            <li>KOL profile matching</li>
+            <li>Negotiation support</li>
+            <li>Content approval support</li>
+          </ul>
+        </div>
+        <div class="collab-card">
+          <div class="collab-type">Event / Store / Talent</div>
+          <h4>Custom Activation</h4>
+          <p class="collab-desc">For event attendance, store visit, live hosting, talent shoot, seeding or launch push.</p>
+          <div class="collab-price-label">Starting from</div>
+          <div class="collab-price">Quote</div>
+          <div class="collab-price-unit">based on scope and creator tier</div>
+          <ul>
+            <li>Talent / event coordination</li>
+            <li>Onsite or content brief support</li>
+            <li>Usage rights guidance</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fee-covers">
+        <div class="fc-label">What our management fee covers</div>
+        <div class="fc-steps">
+          <span><b>01</b>Sourcing</span>
+          <span><b>02</b>Briefing</span>
+          <span><b>03</b>Coordination</span>
+          <span><b>04</b>Approval</span>
+          <span><b>05</b>Posting</span>
+          <span><b>06</b>Report</span>
+        </div>
+      </div>
+
+      <div class="tnc-block">
+        <div class="tnc-label">T&amp;C Highlights</div>
+        <ul class="tnc-grid">
+          <li>Management fees shown. Influencer talent fees are quoted separately unless stated.</li>
+          <li>Creator list is subject to availability and creator acceptance.</li>
+          <li>Final cost depends on niche, tier, scope, usage rights and timeline.</li>
+          <li>Paid ads, travel, venue and production costs are excluded unless stated.</li>
+          <li>Client provides brief, product/service details and approval feedback.</li>
+          <li>Two minor revisions included before posting, unless agreed otherwise.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <img class="contact-logo" src="assets/logo-stacked.png" alt="smtghaus">
+        <div class="eyebrow">Let's Build Something Remarkable</div>
+        <h2>Your brand. Elevated.</h2>
+        <p>Tell us about your project and budget — we'll match you to the right package or scope a custom retainer.</p>
+        <div class="info-line">
+          <span class="info-icon" title="Email">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="5" width="18" height="14" rx="2.5"></rect>
+              <path d="M3.5 6.5 12 13 20.5 6.5"></path>
+            </svg>
+          </span>
+          <a href="mailto:smtghauscreative@gmail.com">smtghauscreative@gmail.com</a>
+        </div>
+        <div class="info-line">
+          <span class="info-icon" title="WhatsApp">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5C10 9 9.5 7.8 9.3 7.3c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.4-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 2 3 4.7 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"></path>
+              <path d="M12 2.5A9.5 9.5 0 0 0 3.6 17l-1.1 4 4.1-1.1A9.5 9.5 0 1 0 12 2.5z" fill="none" stroke="currentColor" stroke-width="1.4"></path>
+            </svg>
+          </span>
+          <a href="https://wa.me/601161648851" target="_blank">+60 11-6164 8851</a>
+        </div>
+        <div class="info-line">
+          <span class="info-icon" title="Instagram">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+              <circle cx="12" cy="12" r="4.2"></circle>
+              <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"></circle>
+            </svg>
+          </span>
+          <a href="https://www.instagram.com/smtghaus/" target="_blank">@smtghaus</a>
+        </div>
+        <div class="info-line">
+          <span class="info-icon" title="Location">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"></path>
+              <circle cx="12" cy="9.5" r="2.4"></circle>
+            </svg>
+          </span>
+          <span>Kuala Lumpur, Malaysia</span>
+        </div>
+      </div>
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID" method="POST">
+        <input type="hidden" name="_subject" value="New enquiry from smtghaus.com">
+        <div class="form-row">
+          <div class="field"><label>Name</label><input type="text" name="name" required placeholder="Your name"></div>
+          <div class="field"><label>Company</label><input type="text" name="company" placeholder="Brand / company"></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Email</label><input type="email" name="email" required placeholder="you@brand.com"></div>
+          <div class="field"><label>Monthly Budget</label>
+            <select name="budget">
+              <option>Under RM5,000</option>
+              <option>RM5,000 – RM10,000</option>
+              <option>RM10,000 – RM20,000</option>
+              <option>RM20,000+</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Project Type</label>
+            <select name="project_type">
+              <option>Brand Visual Direction</option>
+              <option>Influencer Campaign</option>
+              <option>Ongoing Design Retainer</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="field"><label>Timeline</label>
+            <select name="timeline">
+              <option>ASAP</option>
+              <option>Within 1 month</option>
+              <option>1–3 months</option>
+              <option>Just exploring</option>
+            </select>
+          </div>
+        </div>
+        <div class="field full" style="margin-bottom:16px;">
+          <label>Tell us about your project</label>
+          <textarea name="message" placeholder="A few lines about your brand and goals..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+        <div class="form-note">We usually reply within 1–2 business days.</div>
+        <div id="formConfirm">Thanks! Your message has been sent — we usually reply within 1–2 business days.</div>
+        <div id="formError">Something went wrong sending your message. Please email us directly at <a href="mailto:smtghauscreative@gmail.com">smtghauscreative@gmail.com</a>.</div>
+      </form>
+    </div>
+    <div class="contact-foot-bar">
+      <span>© 2026 smtghaus. All rights reserved.</span>
+    </div>
+  </div>
+</section>
+
+
+<script>
+  // Sticky nav shadow
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 12);
+  });
+
+  // Hero rotating word
+  const words = ['Shape.', 'Move.', 'Transform.', 'Glow.'];
+  let wi = 0;
+  const rotatorEl = document.getElementById('rotator');
+  setInterval(() => {
+    wi = (wi + 1) % words.length;
+    rotatorEl.style.opacity = 0;
+    setTimeout(() => { rotatorEl.textContent = words[wi]; rotatorEl.style.opacity = 1; }, 250);
+  }, 2200);
+
+  // Build real client logo marquee
+  const clientLogos = ['leapmotor','envora','roundlab','agibot','hatch','wanderlust','phhubby','thesaem','cinch','sensestone','artedeluxe','neoaktif','umg'];
+  const track = document.getElementById('logoTrack');
+  const html = clientLogos.map(slug => `<img src="assets/logos/${slug}.png" alt="${slug} logo">`).join('');
+  track.innerHTML = html + html; // duplicate for seamless loop
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // Count-up stats
+  const statEls = document.querySelectorAll('.stat-num');
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.target, 10);
+        let cur = 0;
+        const step = Math.max(1, Math.round(target / 60));
+        const timer = setInterval(() => {
+          cur += step;
+          if (cur >= target) { cur = target; clearInterval(timer); }
+          el.textContent = cur.toLocaleString('en-US') + '+';
+        }, 20);
+        statObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.4 });
+  statEls.forEach(el => statObserver.observe(el));
+
+  // Contact form -> Formspree
+  document.getElementById('contactForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const confirmEl = document.getElementById('formConfirm');
+    const errorEl = document.getElementById('formError');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    confirmEl.style.display = 'none';
+    errorEl.style.display = 'none';
+    submitBtn.disabled = true;
+    const originalLabel = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (response.ok) {
+        confirmEl.style.display = 'block';
+        form.reset();
+      } else {
+        errorEl.style.display = 'block';
+      }
+    } catch (err) {
+      errorEl.style.display = 'block';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+    }
+  });
+</script>
+</body>
+</html>
